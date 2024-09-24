@@ -30,11 +30,14 @@ echo "Installing Powerlevel10k theme..."
 run_command "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 run_command "sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"powerlevel10k\/powerlevel10k\"/' ~/.zshrc"
 
+echo "Updating plugins in .zshrc..."
+run_command "sed -i '/^plugins=/ c\plugins=(\n\tgit\n\tfzf\n\ttmux\n\tthemes\n\tsudo\n\tpython\n\tzsh-autosuggestions\n\tzsh-syntax-highlighting\n)' ~/.zshrc"
+
 echo "Downloading p10k configuration file..."
 run_command "curl -o ~/.p10k.zsh https://raw.githubusercontent.com/Rudraksh88/aws-auto/refs/heads/master/.p10k.zsh"
 
-echo "Updating plugins in .zshrc..."
-run_command "sed -i '/^plugins=/ c\plugins=(\n\tgit\n\tfzf\n\ttmux\n\tthemes\n\tsudo\n\tpython\n\tzsh-autosuggestions\n\tzsh-syntax-highlighting\n)' ~/.zshrc"
+echo "Adding Powerlevel10k configuration sourcing to .zshrc..."
+run_command "echo '\n# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.\n[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc"
 
 echo "Sourcing the updated .zshrc..."
 run_command "source ~/.zshrc"
