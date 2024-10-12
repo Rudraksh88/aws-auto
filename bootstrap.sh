@@ -14,7 +14,7 @@ echo "Updating and upgrading the system..."
 run_command "sudo apt update && sudo apt upgrade -y"
 
 echo "Installing zsh and other required packages..."
-run_command "sudo apt install -y zsh fzf python3-full nodejs npm build-essential python3-dev libpoppler-cpp-dev"
+run_command "sudo apt install -y zsh fzf python3-full build-essential python3-dev"
 
 echo "Changing default shell to zsh..."
 run_command "sudo chsh -s $(which zsh) $(whoami)"
