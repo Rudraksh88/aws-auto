@@ -36,10 +36,22 @@ run_command "sed -i '/^plugins=/ c\plugins=(\n\tgit\n\tfzf\n\ttmux\n\tthemes\n\t
 echo "Downloading p10k configuration file..."
 run_command "curl -o ~/.p10k.zsh https://raw.githubusercontent.com/Rudraksh88/aws-auto/refs/heads/master/.p10k.zsh"
 
+# Switch to Zsh for the remaining commands
+echo "Switching to Zsh for remaining commands..."
+zsh << 'EOF'
+# Function to run command and print its output (in Zsh)
+run_command() {
+    echo "Running: $1"
+    eval "$1"
+    echo "Command finished with exit code $?"
+    echo "----------------------------------------"
+}
+
 echo "Adding Powerlevel10k configuration sourcing to .zshrc..."
-run_command "echo '\n# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.\n[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc"
+run_command "echo '\n# To customize prompt, run \`p10k configure\` or edit ~/.p10k.zsh.\n[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc"
 
 echo "Sourcing the updated .zshrc..."
 run_command "source ~/.zshrc"
 
 echo "Setup complete! Please log out and log back in for all changes to take effect."
+EOF
